@@ -1,20 +1,11 @@
-from appium import webdriver
+
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common import NoSuchElementException, InvalidElementStateException
 
 
 class BasePage:
-    capabilities = dict(
-        platformName='',
-        automationName='',
-        appPackage='',
-        appActivity='',
-    )
-
-    appium_server_url = 'http://localhost:4723'
-
-    def __init__(self):
-        self.driver = webdriver.Remote(self.appium_server_url, self.capabilities)
+    def __init__(self, driver):
+        self.driver = driver
 
     def swipe_to_element(self, text_attribute, duration=2500):
         last_element_on_screen = None

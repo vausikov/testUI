@@ -1,13 +1,16 @@
 import time
 import pytest
 from helpers import ADBCommands
+from helpers.driver_manager import DriverManager
 from selenium.common import NoSuchElementException
 from pages import AndroidSettings
 
 
 class TestBuildNumber:
 
-    settings = AndroidSettings()
+    driver = DriverManager().driver
+    driver.capabilities.update([('appPackage','com.android.settings'), ('appActivity', '.Settings')])
+    settings = AndroidSettings(driver)
 
     # TODO:
     #   1: Выключать жесты на 13м андроиде перед тестами
@@ -19,8 +22,9 @@ class TestBuildNumber:
             Тест проверяет Номер сборки, отображающийся в UI гугловских настроек и сравнивает его
             со значением из системного проперти ro.build.id
         """
+        self.driver.activate_app(self.driver.capabilities['appPackage'])
         try:
-            if self.settings.driver.current_activity == self.settings.capabilities.get('appActivity'):
+            if self.driver.current_activity == self.driver.capabilities.get('appActivity'):
                 self.settings.swipe_to_element('О телефоне', duration=2000).click()
                 time.sleep(1)
                 if self.settings.driver.current_activity == '.SubSettings':

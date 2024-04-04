@@ -1,11 +1,13 @@
 import time
 from appium.webdriver.common.appiumby import AppiumBy
+from helpers.driver_manager import DriverManager
 from pages import AndroidSettings
 
 
 class TestWiFi:
-
-    settings = AndroidSettings()
+    driver = DriverManager().driver
+    driver.capabilities.update([('appPackage', 'com.android.settings'), ('appActivity', '.Settings')])
+    settings = AndroidSettings(driver)
 
     def test_switch_on(self):
         """
@@ -16,6 +18,7 @@ class TestWiFi:
                 В настройках отображается "Подключено"
                 Выдался айпишник и мак адрес
         """
+        self.driver.activate_app(self.driver.capabilities['appPackage'])
         self.settings.swipe_to_element('Сеть и интернет', 2000).click()
         time.sleep(1)
         self.settings.swipe_to_element('Интернет', 2000).click()
