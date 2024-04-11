@@ -2,7 +2,13 @@ from appium import webdriver
 
 class DriverManager:
 
+
+
     def __init__(self):
+        """
+            Драйвер инициализируется без package и actiity, чтобы можно было разные экземпляры страниц использовать
+            с одним и тем де драйвером
+        """
         capabilities = dict(
             platformName='Android',
             automationName='uiautomator2',

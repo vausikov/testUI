@@ -20,7 +20,7 @@ class TestWiFi:
         """
         self.driver.activate_app(self.driver.capabilities['appPackage'])
         self.settings.swipe_to_element('Сеть и интернет', 2000).click()
-        time.sleep(1)
+        time.sleep(1) #sleep - это плохая музыка. весто этого надо использовать явные/не явные ожидания, но тут это не в приоритете
         self.settings.swipe_to_element('Интернет', 2000).click()
         time.sleep(1)
         self.settings.driver.find_element(AppiumBy.CLASS_NAME, 'android.widget.Switch').click()

@@ -12,11 +12,6 @@ class TestBuildNumber:
     driver.capabilities.update([('appPackage','com.android.settings'), ('appActivity', '.Settings')])
     settings = AndroidSettings(driver)
 
-    # TODO:
-    #   1: Выключать жесты на 13м андроиде перед тестами
-    #   2: Каждый раз, когда происходит переход на друго активити,
-    #  идет проверка на то, что оно действительно открылось. Необходимо как то подумать над вложенностью проверок
-
     def test_build_number(self):
         """
             Тест проверяет Номер сборки, отображающийся в UI гугловских настроек и сравнивает его
